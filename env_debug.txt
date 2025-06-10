@@ -1,1 +1,121 @@
-pip install torch==1.3.1+cu100 torchvision==0.4.2+cu100 -f https://download.pytorch.org/whl/torch_stable.html
+bsub -Is -q gpu -gpu "num=1:j_exclusive=yes:gmem=15000" -n 4 python tools/plain_train_net.py --eval-only --config-file "configs/smoke_gn_vector.yaml"
+WARNING: No OS version has been requested! Future OS versions would also be targeted.
+Job <91755512> is submitted to queue <gpu>.
+<<Waiting for dispatch ...>>
+<<Starting on muclcgpu02>>
+Command Line Args: Namespace(ckpt=None, config_file='configs/smoke_gn_vector.yaml', dist_url='tcp://127.0.0.1:57032', eval_only=True, machine_rank=0, num_gpus=1, num_machines=1, opts=[])
+[2025-06-10 13:42:05,307] smoke INFO: Using 1 GPUs
+[2025-06-10 13:42:05,307] smoke INFO: Collecting environment info
+[2025-06-10 13:42:06,633] smoke INFO: 
+PyTorch version: 1.3.1+cu100
+Is debug build: No
+CUDA used to build PyTorch: 10.0.130
+
+OS: Red Hat Enterprise Linux Server release 7.9 (Maipo)
+GCC version: (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44)
+CMake version: version 3.17.3
+
+Python version: 3.6
+Is CUDA available: Yes
+CUDA runtime version: 10.0.130
+GPU models and configuration: GPU 0: NVIDIA A30
+Nvidia driver version: 545.23.08
+cuDNN version: Could not collect
+
+Versions of relevant libraries:
+[pip3] numpy==1.19.5
+[pip3] torch==1.3.1+cu100
+[pip3] torchvision==0.4.2+cu100
+[conda] Could not collect
+        Pillow (8.4.0)
+[2025-06-10 13:42:06,633] smoke INFO: Namespace(ckpt=None, config_file='configs/smoke_gn_vector.yaml', dist_url='tcp://127.0.0.1:57032', eval_only=True, machine_rank=0, num_gpus=1, num_machines=1, opts=[])
+[2025-06-10 13:42:06,634] smoke INFO: Loaded configuration file configs/smoke_gn_vector.yaml
+[2025-06-10 13:42:06,634] smoke INFO: 
+MODEL:
+  WEIGHT: "catalog://ImageNetPretrained/DLA34"
+INPUT:
+  FLIP_PROB_TRAIN: 0.5
+  SHIFT_SCALE_PROB_TRAIN: 0.3
+DATASETS:
+  DETECT_CLASSES: ("Car", "Cyclist", "Pedestrian")
+  TRAIN: ("kitti_train",)
+  TEST: ("kitti_test",)
+  TRAIN_SPLIT: "trainval"
+  TEST_SPLIT: "test"
+SOLVER:
+  BASE_LR: 2.5e-4
+  STEPS: (10000, 18000)
+  MAX_ITERATION: 25000
+  IMS_PER_BATCH: 32
+[2025-06-10 13:42:06,634] smoke INFO: Running with config:
+CUDNN_BENCHMARK: True
+DATALOADER:
+  ASPECT_RATIO_GROUPING: False
+  NUM_WORKERS: 4
+  SIZE_DIVISIBILITY: 0
+DATASETS:
+  DETECT_CLASSES: ('Car', 'Cyclist', 'Pedestrian')
+  MAX_OBJECTS: 30
+  TEST: ('kitti_test',)
+  TEST_SPLIT: test
+  TRAIN: ('kitti_train',)
+  TRAIN_SPLIT: trainval
+INPUT:
+  FLIP_PROB_TRAIN: 0.5
+  HEIGHT_TEST: 384
+  HEIGHT_TRAIN: 384
+  PIXEL_MEAN: [0.485, 0.456, 0.406]
+  PIXEL_STD: [0.229, 0.224, 0.225]
+  SHIFT_SCALE_PROB_TRAIN: 0.3
+  SHIFT_SCALE_TRAIN: (0.2, 0.4)
+  TO_BGR: True
+  WIDTH_TEST: 1280
+  WIDTH_TRAIN: 1280
+MODEL:
+  BACKBONE:
+    BACKBONE_OUT_CHANNELS: 64
+    CONV_BODY: DLA-34-DCN
+    DOWN_RATIO: 4
+    FREEZE_CONV_BODY_AT: 0
+    USE_NORMALIZATION: GN
+  DEVICE: cuda
+  GROUP_NORM:
+    DIM_PER_GP: -1
+    EPSILON: 1e-05
+    NUM_GROUPS: 32
+  SMOKE_HEAD:
+    DEPTH_REFERENCE: (28.01, 16.32)
+    DIMENSION_REFERENCE: ((3.88, 1.63, 1.53), (1.78, 1.7, 0.58), (0.88, 1.73, 0.67))
+    LOSS_ALPHA: 2
+    LOSS_BETA: 4
+    LOSS_TYPE: ('FocalLoss', 'DisL1')
+    LOSS_WEIGHT: (1.0, 10.0)
+    NUM_CHANNEL: 256
+    PREDICTOR: SMOKEPredictor
+    REGRESSION_CHANNEL: (1, 2, 3, 2)
+    REGRESSION_HEADS: 8
+    USE_NMS: False
+    USE_NORMALIZATION: GN
+  SMOKE_ON: True
+  WEIGHT: catalog://ImageNetPretrained/DLA34
+OUTPUT_DIR: ./tools/logs
+PATHS_CATALOG: /home/sfusion/users/hassan/CodeBase/SMOKE/smoke/config/paths_catalog.py
+SEED: -1
+SOLVER:
+  BASE_LR: 0.00025
+  BIAS_LR_FACTOR: 2
+  CHECKPOINT_PERIOD: 20
+  EVALUATE_PERIOD: 20
+  IMS_PER_BATCH: 32
+  LOAD_OPTIMIZER_SCHEDULER: True
+  MASTER_BATCH: -1
+  MAX_ITERATION: 25000
+  OPTIMIZER: Adam
+  STEPS: (10000, 18000)
+TEST:
+  DETECTIONS_PER_IMG: 50
+  DETECTIONS_THRESHOLD: 0.25
+  IMS_PER_BATCH: 1
+  PRED_2D: True
+  SINGLE_GPU_TEST: True
+[2025-06-10 13:42:06,634] smoke.utils.envs INFO: Using a generated random seed 6804819
