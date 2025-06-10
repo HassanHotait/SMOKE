@@ -1,0 +1,37 @@
+(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ python3.6
+Python 3.6.8 (default, Nov 15 2024, 08:11:39) 
+[GCC 8.5.0 20210514 (Red Hat 8.5.0-22)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+>>> torch.cuda.is_available()
+False
+>>> 
+(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ pip show
+WARNING: ERROR: Please provide a package name or names.
+(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ pip list
+Package    Version
+---------- -------
+pip        20.2.3
+setuptools 49.2.1
+WARNING: You are using pip version 20.2.3; however, version 25.1.1 is available.
+You should consider upgrading via the '/home/sfusion/users/hassan/envs/venv_smoke/bin/python -m pip install --upgrade pip' command.
+(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ python3.6 -m pip show torch
+Name: torch
+Version: 1.4.0+cu92
+Summary: Tensors and Dynamic neural networks in Python with strong GPU acceleration
+Home-page: https://pytorch.org/
+Author: PyTorch Team
+Author-email: packages@pytorch.org
+License: BSD-3
+Location: /home/hotait/.local/lib/python3.6/site-packages
+Requires: 
+(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ module list
+Currently Loaded Modulefiles:
+  1) lsf/10.1.0     2) python/3.6.2   3) cuda/9.2
+(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ python3.6
+Python 3.6.8 (default, Nov 15 2024, 08:11:39) 
+[GCC 8.5.0 20210514 (Red Hat 8.5.0-22)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import torch
+>>> torch.cuda.is_available()
+False
