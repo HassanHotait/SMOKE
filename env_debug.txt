@@ -1,37 +1,28 @@
-(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ python3.6
-Python 3.6.8 (default, Nov 15 2024, 08:11:39) 
-[GCC 8.5.0 20210514 (Red Hat 8.5.0-22)] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import torch
->>> torch.cuda.is_available()
-False
->>> 
-(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ pip show
-WARNING: ERROR: Please provide a package name or names.
-(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ pip list
-Package    Version
----------- -------
-pip        20.2.3
-setuptools 49.2.1
-WARNING: You are using pip version 20.2.3; however, version 25.1.1 is available.
-You should consider upgrading via the '/home/sfusion/users/hassan/envs/venv_smoke/bin/python -m pip install --upgrade pip' command.
-(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ python3.6 -m pip show torch
-Name: torch
-Version: 1.4.0+cu92
-Summary: Tensors and Dynamic neural networks in Python with strong GPU acceleration
-Home-page: https://pytorch.org/
-Author: PyTorch Team
-Author-email: packages@pytorch.org
-License: BSD-3
-Location: /home/hotait/.local/lib/python3.6/site-packages
-Requires: 
-(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ module list
-Currently Loaded Modulefiles:
-  1) lsf/10.1.0     2) python/3.6.2   3) cuda/9.2
-(venv_smoke) hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ python3.6
-Python 3.6.8 (default, Nov 15 2024, 08:11:39) 
-[GCC 8.5.0 20210514 (Red Hat 8.5.0-22)] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import torch
->>> torch.cuda.is_available()
-False
+File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/utils/cpp_extension.py", line 991, in _get_cuda_arch_flags
+    raise ValueError("Unknown CUDA arch ({}) or GPU not supported".format(arch))
+ValueError: Unknown CUDA arch (8.0) or GPU not supported
+[venv_smoke] hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ bsub -Is -R "osrel==70&&ui==package_internet" -q gpu -gpu "num=1:j_exclusive=yes:gmem=15000" -n 16 nvidia-smi
+Job <91713083> is submitted to queue <gpu>.
+<<Waiting for dispatch ...>>
+<<Starting on muclcgpu01>>
+Tue Jun 10 11:08:34 2025       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA A30                     Off | 00000000:17:00.0 Off |                    0 |
+| N/A   22C    P0              27W / 165W |      4MiB / 24576MiB |      0%      Default |
+|                                         |                      |             Disabled |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+
