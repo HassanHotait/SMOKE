@@ -1,28 +1,9 @@
-File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/utils/cpp_extension.py", line 991, in _get_cuda_arch_flags
-    raise ValueError("Unknown CUDA arch ({}) or GPU not supported".format(arch))
-ValueError: Unknown CUDA arch (8.0) or GPU not supported
-[venv_smoke] hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ bsub -Is -R "osrel==70&&ui==package_internet" -q gpu -gpu "num=1:j_exclusive=yes:gmem=15000" -n 16 nvidia-smi
-Job <91713083> is submitted to queue <gpu>.
-<<Waiting for dispatch ...>>
-<<Starting on muclcgpu01>>
-Tue Jun 10 11:08:34 2025       
-+---------------------------------------------------------------------------------------+
-| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
-|-----------------------------------------+----------------------+----------------------+
-| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
-|                                         |                      |               MIG M. |
-|=========================================+======================+======================|
-|   0  NVIDIA A30                     Off | 00000000:17:00.0 Off |                    0 |
-| N/A   22C    P0              27W / 165W |      4MiB / 24576MiB |      0%      Default |
-|                                         |                      |             Disabled |
-+-----------------------------------------+----------------------+----------------------+
-                                                                                         
-+---------------------------------------------------------------------------------------+
-| Processes:                                                                            |
-|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
-|        ID   ID                                                             Usage      |
-|=======================================================================================|
-|  No running processes found                                                           |
-+---------------------------------------------------------------------------------------+
+building 'smoke._ext' extension
+gcc -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -DWITH_CUDA -I/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/csrc -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include/torch/csrc/api/include -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include/TH -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include/THC -I/opt/cuda/cuda/cuda-9.2/include -I/home/sfusion/users/hassan/envs/venv_smoke/include -I/opt/python/3.6.2/linux70_64/include/python3.6m -c /home/sfusion/users/hassan/CodeBase/SMOKE/smoke/csrc/vision.cpp -o build/temp.linux-x86_64-3.6/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/csrc/vision.o -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_ext -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++11
+cc1plus: warning: command line option '-Wstrict-prototypes' is valid for C/ObjC but not for C++
+gcc -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -DWITH_CUDA -I/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/csrc -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include/torch/csrc/api/include -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include/TH -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include/THC -I/opt/cuda/cuda/cuda-9.2/include -I/home/sfusion/users/hassan/envs/venv_smoke/include -I/opt/python/3.6.2/linux70_64/include/python3.6m -c /home/sfusion/users/hassan/CodeBase/SMOKE/smoke/csrc/cpu/dcn_v2_cpu.cpp -o build/temp.linux-x86_64-3.6/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/csrc/cpu/dcn_v2_cpu.o -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_ext -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++11
+cc1plus: warning: command line option '-Wstrict-prototypes' is valid for C/ObjC but not for C++
+/opt/cuda/cuda/cuda-9.2/bin/nvcc -DWITH_CUDA -I/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/csrc -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include/torch/csrc/api/include -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include/TH -I/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/include/THC -I/opt/cuda/cuda/cuda-9.2/include -I/home/sfusion/users/hassan/envs/venv_smoke/include -I/opt/python/3.6.2/linux70_64/include/python3.6m -c /home/sfusion/users/hassan/CodeBase/SMOKE/smoke/csrc/cuda/dcn_v2_cuda.cu -o build/temp.linux-x86_64-3.6/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/csrc/cuda/dcn_v2_cuda.o -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options '-fPIC' -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_ext -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_80,code=sm_80 -std=c++11
+nvcc fatal   : Unsupported gpu architecture 'compute_80'
+error: command '/opt/cuda/cuda/cuda-9.2/bin/nvcc' failed with exit status 1
 
