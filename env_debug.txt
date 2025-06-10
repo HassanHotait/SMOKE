@@ -1,67 +1,25 @@
-venv_smoke] hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ bsub -Is -q gpu -gpu "num=1:j_exclusive=yes:gmem=15000" -n 4 python tools/plain_train_net.py --eval-only --config-file "configs/smoke_gn_vector.yaml"
+[venv_smoke] hotait@muclc0478:/home/sfusion/users/hassan/CodeBase/SMOKE$ bsub -Is -q gpu -gpu "num=1:j_exclusive=yes:gmem=15000" -n 4 python tools/plain_train_net.py --eval-only --config-file "configs/smoke_gn_vector.yaml"
 WARNING: No OS version has been requested! Future OS versions would also be targeted.
-Job <91722624> is submitted to queue <gpu>.
+Job <91725314> is submitted to queue <gpu>.
 <<Waiting for dispatch ...>>
-<<Starting on muclcgpu05>>
+<<Starting on muclcgpu12>>
 Traceback (most recent call last):
-  File "tools/plain_train_net.py", line 4, in <module>
-    from smoke.data import make_data_loader
-  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/data/__init__.py", line 1, in <module>
-    from .build import make_data_loader
-  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/data/build.py", line 14, in <module>
-    from .transforms import build_transforms
-  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/data/transforms/__init__.py", line 1, in <module>
-    from .build import build_transforms
-  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/data/transforms/build.py", line 1, in <module>
-    from . import transforms as T
-  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/data/transforms/transforms.py", line 2, in <module>
-    from torchvision.transforms import functional as F
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torchvision/__init__.py", line 3, in <module>
-    from torchvision import models
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torchvision/models/__init__.py", line 12, in <module>
-    from . import detection
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torchvision/models/detection/__init__.py", line 1, in <module>
-    from .faster_rcnn import *
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torchvision/models/detection/faster_rcnn.py", line 13, in <module>
-    from .rpn import AnchorGenerator, RPNHead, RegionProposalNetwork
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torchvision/models/detection/rpn.py", line 11, in <module>
-    from . import _utils as det_utils
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torchvision/models/detection/_utils.py", line 19, in <module>
-    class BalancedPositiveNegativeSampler(object):
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/jit/__init__.py", line 1219, in script
-    _compile_and_register_class(obj, _rcb, qualified_name)
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/jit/__init__.py", line 1076, in _compile_and_register_class
-    _jit_script_class_compile(qualified_name, ast, rcb)
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/jit/_recursive.py", line 222, in try_compile_fn
-    return torch.jit.script(fn, _rcb=rcb)
-  File "/home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torch/jit/__init__.py", line 1226, in script
-    fn = torch._C._jit_script_compile(qualified_name, ast, _rcb, get_default_args(obj))
-RuntimeError: 
-builtin cannot be used as a value:
-at /home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torchvision/models/detection/_utils.py:14:56
-def zeros_like(tensor, dtype):
-    # type: (Tensor, int) -> Tensor
-    return torch.zeros_like(tensor, dtype=dtype, layout=tensor.layout,
-                                                        ~~~~~~~~~~~~~ <--- HERE
-                            device=tensor.device, pin_memory=tensor.is_pinned())
-'zeros_like' is being compiled since it was called from '__torch__.torchvision.models.detection._utils.BalancedPositiveNegativeSampler.__call__'
-at /home/sfusion/users/hassan/envs/venv_smoke/lib/python3.6/site-packages/torchvision/models/detection/_utils.py:72:12
-
-            # randomly select positive and negative examples
-            perm1 = torch.randperm(positive.numel(), device=positive.device)[:num_pos]
-            perm2 = torch.randperm(negative.numel(), device=negative.device)[:num_neg]
-
-            pos_idx_per_image = positive[perm1]
-            neg_idx_per_image = negative[perm2]
-
-            # create binary mask from indices
-            pos_idx_per_image_mask = zeros_like(
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~...  <--- HERE
-                matched_idxs_per_image, dtype=torch.uint8
-            )
-            neg_idx_per_image_mask = zeros_like(
-                matched_idxs_per_image, dtype=torch.uint8
-            )
-
-            pos_idx_per_image_mask[pos_idx_per_image] = torch.tensor(1, dtype=torch.uint8)
-            neg_idx_per_image_mask[neg_idx_per_image] = torch.tensor(1, dtype=torch.uint8)
+  File "tools/plain_train_net.py", line 17, in <module>
+    from smoke.modeling.detector import build_detection_model
+  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/modeling/detector/__init__.py", line 1, in <module>
+    from .detectors import build_detection_model
+  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/modeling/detector/detectors.py", line 1, in <module>
+    from .keypoint_detector import KeypointDetector
+  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/modeling/detector/keypoint_detector.py", line 6, in <module>
+    from ..backbone import build_backbone
+  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/modeling/backbone/__init__.py", line 1, in <module>
+    from .backbone import build_backbone
+  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/modeling/backbone/backbone.py", line 6, in <module>
+    from . import dla
+  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/modeling/backbone/dla.py", line 7, in <module>
+    from smoke.layers.deform_conv import DeformConv
+  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/layers/deform_conv.py", line 4, in <module>
+    from smoke.layers.dcn_v2 import DCN
+  File "/home/sfusion/users/hassan/CodeBase/SMOKE/smoke/layers/dcn_v2.py", line 14, in <module>
+    from smoke import _ext as _backend
+ImportError: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.26' not found (required by /home/sfusion/users/hassan/CodeBase/SMOKE/smoke/_ext.cpython-36m-x86_64-linux-gnu.so)
