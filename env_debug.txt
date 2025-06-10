@@ -1,1 +1,19 @@
-pip install torch==1.3.1+cu100 torchvision==0.4.2+cu100 -f https://download.pytorch.org/whl/torch_stable.html
+hotait@mucll003:~$ setenv PATH "/home/hotait/local/python3.7/bin:$PATH"
+hotait@mucll003:~$ python3.7
+Python 3.7.17 (default, Jun 10 2025, 16:16:08) 
+[GCC 11.4.1 20231218 (Red Hat 11.4.1-3)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+hotait@mucll003:~$ bsub -Is -R osrel=80 $SHELL
+bsub: Command not found.
+hotait@mucll003:~$ module load lsf cuda/10.0
+hotait@mucll003:~$ bsub -Is -R osrel=70 $SHELL
+Job <91801060> is submitted to queue <batch>.
+<<Waiting for dispatch ...>>
+<<Starting on muclc0483>>
+hotait@muclc0483:~$ python3.7
+python3.7: error while loading shared libraries: libcrypt.so.2: cannot open shared object file: No such file or directory
+hotait@muclc0483:~$ setenv PATH "/home/hotait/local/python3.7/bin:$PATH"
+hotait@muclc0483:~$ python3.7
+python3.7: error while loading shared libraries: libcrypt.so.2: cannot open shared object file: No such file or directory
+hotait@muclc0483:~$ 
